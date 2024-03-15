@@ -13,8 +13,10 @@ if __name__ == "__main__":
     print("Select the most common SNPs from merged version of (Familial and Autopsy) dataset and check those SNPs quality for getting the accuracy after adding LD:")    
     
     # reading most common SNPs
-    SNPsList = []    
-    f1 = open('/scratch/fs2/usefi/pd/datasets/All_Aproaches/Approach3/Part_B/FamilyAndAutopsy/CV/mostCommonSNPs.txt', 'r')
+    SNPsList = []   
+    # needs to be replaced by the path of files
+    path = ''
+    f1 = open(path + '/mostCommonSNPs.txt', 'r')
     for line1 in f1:
         SNPsList.append(line1.strip())  # We don't want newlines in our list, do we?
 
@@ -22,15 +24,15 @@ if __name__ == "__main__":
     # SNPsList = list(SNPsDic.keys())
     print(len(SNPsList))
 
-
-    path = '/scratch/fs2/usefi/pd/datasets/All_Aproaches/Approach3/Datasets/'
+    # needs to be replaced by the path of dataset files
+    path = ''
 
     print("current path of working space= " + path)
 
         
     # SNPs that are in LD with our most common SNPs
     LDList = []    
-    f1 = open('/scratch/fs2/usefi/pd/datasets/All_Aproaches/Approach3/Part_B/FamilyAndAutopsy/CV/SNPsInLDWithMostCommonSNPs.txt', 'r')
+    f1 = open(path + '/SNPsInLDWithMostCommonSNPs.txt', 'r')
     for line1 in f1:
         LDList.append(line1.strip())  # We don't want newlines in our list, do we?
     
