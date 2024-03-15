@@ -15,7 +15,8 @@ import csv
 def main():
 
     dataset_list = ['PD_2_NINDS_28Jan2022']
-    path = "/scratch/fs2/usefi/pd/datasets/All_Aproaches/Approach0/Datasets/"
+    # needs to be replaced by the path of files
+    path = ""
     # Parameters
     k = 50
     th_irr = 3
