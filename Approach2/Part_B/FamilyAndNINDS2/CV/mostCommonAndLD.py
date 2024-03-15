@@ -14,8 +14,10 @@ if __name__ == "__main__":
     
         
     # reading most common SNPs
-    SNPsList = []    
-    f1 = open('/scratch/fs2/usefi/pd/datasets/All_Aproaches/Approach2/Part_B/FamilyAndNINDS2/CV/mostCommonSNPs.txt', 'r')
+    SNPsList = [] 
+    # needs to be replaced by the path of files
+    path = ''
+    f1 = open(path + '/mostCommonSNPs.txt', 'r')
     for line1 in f1:
         SNPsList.append(line1.strip())  # We don't want newlines in our list, do we?
 
@@ -24,14 +26,14 @@ if __name__ == "__main__":
     print(len(SNPsList))
 
 
-    path = '/scratch/fs2/usefi/pd/datasets/All_Aproaches/Approach2/Datasets/IntersectionFamilyAndNINDS2/'
+    path = ''
 
     print("current path of working space= " + path)
 
         
     # SNPs that are in LD with our most common SNPs
     LDList = []    
-    f1 = open('/scratch/fs2/usefi/pd/datasets/All_Aproaches/Approach2/Part_B/FamilyAndNINDS2/CV/SNPsInLDWithMostCommon.txt', 'r')
+    f1 = open(path + '/SNPsInLDWithMostCommon.txt', 'r')
     for line1 in f1:
         LDList.append(line1.strip())  # We don't want newlines in our list, do we?
     
