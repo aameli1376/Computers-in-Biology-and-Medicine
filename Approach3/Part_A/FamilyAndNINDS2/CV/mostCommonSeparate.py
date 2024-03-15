@@ -39,8 +39,8 @@ if __name__ == "__main__":
 
     SNPsList = list(SNPsDic.keys())
     print(len(SNPsList))
-    
-    path = "/scratch/fs2/usefi/pd/datasets/All_Aproaches/Approach3/Datasets/ID/" 
+    # needs to be replaced by the path of files
+    path = "" 
     # This is the smaller dataset (we found the SNPs from this dataset)
     print("Reading FamilyNINDS2(MergedWithID).csv ...")
     df = pd.read_csv(path + "FamilyNINDS2(MergedWithID).csv")
