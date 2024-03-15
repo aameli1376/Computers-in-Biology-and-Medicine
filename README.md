@@ -13,6 +13,13 @@ This repository contains the implementation of five different approaches for pre
   - Pandas: 1.2.1
   - Scikit-learn: 0.24.1
   - Matplotlib: 3.3.4
+
+ ## Setting Up Environment
+
+To run this project, you need to set up your environment with the necessary dependencies. Follow these steps:
+
+`pip install -r requirements.txt`
+
 ## Approaches
 
 ### Approach 0: Baseline Approach
