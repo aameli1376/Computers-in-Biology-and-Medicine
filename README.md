@@ -137,6 +137,25 @@ Now, we can run the preprocessing R® script on PED and FAM files to convert the
 
 This section provides instructions on using PLINK to convert dataset files into the PED format, which is essential for further preprocessing. It includes guidance on creating a text file for PLINK, running the conversion command, and identifying the output files required for subsequent processing.
 
+## Data Preprocessing
+
+One can see the flowchart of the whole analysis process in Figure 3.2. Details of specific steps are given in Figures 3.3 to 3.6.
+
+![Flowchart of whole process](https://github.com/aameli1376/Computers-in-Biology-and-Medicine/blob/main/data%20preprocessing%201.png)
+*Figure 3.2: Flowchart of the whole process.*
+
+![Flowchart of data preprocessing steps](https://github.com/aameli1376/Computers-in-Biology-and-Medicine/blob/main/data%20preprocessing%202.png)
+*Figure 3.3: Flowchart of data preprocessing steps.*
+
+![Flowchart of hyper parameter optimization for knncatimpute](https://github.com/aameli1376/Computers-in-Biology-and-Medicine/blob/main/data%20preprocessing%203.png)
+*Figure 3.4: Flowchart of hyper parameter optimization for knncatimpute.*
+
+![Flowchart of data gathering steps](https://github.com/aameli1376/Computers-in-Biology-and-Medicine/blob/main/data%20preprocessing%204.png)
+*Figure 3.5: Flowchart of data gathering steps.*
+
+![Flowchart of depicting SVFS tuning steps](https://github.com/aameli1376/Computers-in-Biology-and-Medicine/blob/main/data%20preprocessing%205.png)
+*Figure 3.6: Flowchart of depicting SVFS tuning steps.*
+
 
 ## Approaches
 
