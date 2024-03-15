@@ -14,7 +14,9 @@ if __name__ == "__main__":
     
     # reading most common SNPs
     SNPsList = []    
-    f1 = open('/scratch/fs2/usefi/pd/datasets/All_Aproaches/Approach4/Part_A/FamilyAndAutopsy/CV/mostCommon.txt', 'r')
+    # needs to be replaced by the path of files
+    path = ''
+    f1 = open(path + '/mostCommon.txt', 'r')
     for line1 in f1:
         SNPsList.append(line1.strip())  # We don't want newlines in our list, do we?
 
@@ -22,8 +24,8 @@ if __name__ == "__main__":
     # SNPsList = list(SNPsDic.keys())
     print(len(SNPsList))
 
-
-    path = '/scratch/fs2/usefi/pd/datasets/All_Aproaches/Approach4/Datasets/'
+    # needs to be replaced by the path of dataset files
+    path = ''
 
     print("current path of working space= " + path)
   
