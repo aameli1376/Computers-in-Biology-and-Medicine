@@ -20,6 +20,124 @@ To run this project, you need to set up your environment with the necessary depe
 
 `pip install -r requirements.txt`
 
+## Research Objectives
+
+Genome-Wide Association Studies (GWAS) identify genetic variations in individuals affected with diseases such as Parkinson's disease (PD), which are not present in individuals free of this disease. GWAS data can be used to identify genetic variations associated with the disease of interest. However, GWAS datasets are extensive and contain many more Single Nucleotide Polymorphisms (SNPs pronounced “snips”) than individual samples. To address these challenges, we used a recently developed feature selection algorithm (SVFS) and applied it to PD GWAS datasets. We discovered a group of SNPs that are potentially novel PD biomarkers as we found indirect links between them and PD in the literature but have not directly been associated with PD before. These SNPs open new potential lines of investigation. Some of these SNPs are directly related to PD, while others have an indirect relationship.
+
+## Dataset Description
+
+We are using five different datasets obtained from the database of Genotype and Phenotype (dbGaP) [84].
+
+1. **Phs000126 (Familial) dataset:** This dataset combines the results of two major National Institutes of Health (NIH)-funded genetic research projects aimed at discovering new genes that influence the risk of PD. PROGENI (PI: Tatiana Foroud; R01NS037167) and GenePD (PI: Richard Myers; R01NS036711) have been analyzing and recruiting families with two or more PD affected members for over eight years. There are almost 1,000 PD families in the total sample.
+
+2. **Phs000394 (Autopsy)-Confirmed Parkinson DiseaseGWAS Consortium (APDGC):** This consortium was established to perform a genome-wide association research in people with neuropathologically diagnosed PD and healthy controls. The study's hypothesis is that by enrolling only cases and controls with neuropathologically proven illness status, diagnostic misclassification will be reduced and power to identify novel genetic connections will be increased.
+
+3. **Phs000089 (NINDS) repository:** This repository was created in 2001 with the intention of creating standardized, widely applicable diagnostic and other clinical data as well as a collection of DNA and cell line samples to enhance the field of neurological illness gene discovery. All samples, phenotypic information, and genotypic information are accessible. The collection also includes well-described neurologically healthy control subjects. This collection served as the foundation for both the expanded investigation by Simon-Sanchez et al. and the first stage study by Fung et al. The laboratories of Dr. Andrew Singleton of the National Institute on Aging (NIA) and Dr. John Hardy of the NIA produced and submitted the genotyping data (NIH Intramural, funding from NIA and NINDS). NINDS dataset is divided into NINDS1 and NINDS2.
+
+4. **Genome-Wide Association scan phs000048 (Tier 1):** The dbGaP team at NCBI calculated this Genome-Wide Association scan between genotype and PD status. 443 sibling pairs that were at odds for PD served as the samples. Between June 1996 and May 2004, the sibling pairs were drawn from the Mayo Clinic's Rochester, Minnesota, Department of Neurology's clinical practice. Drs. Maraganore and Rocca used three Perlegen DNA chips per person and 85k SNP markers to give genotype data.
+
+## Data Collection
+
+All used data are gathered from the National Center for Biotechnology Information (NCBI) website.
+
+The table below shows a summary of the used datasets. The provided information is extracted from the ped.log of each dataset.
+
+| Dataset ID          | Samples | Missing Phenotype | Cases | Controls | SNPs    |
+|---------------------|---------|-------------------|-------|----------|---------|
+| phs000394 (Autopsy)| 1001    | 24                | 642   | 335      | 1134514 |
+| phs000126 (Familial)| 2082    | 315               | 900   | 867      | 344301  |
+| phs000089 (NINDS1)  | 1741    | 0                 | 940   | 801      | 545066  |
+| phs000089 (NINDS2)  | 526     | 0                 | 263   | 263      | 241847  |
+| phs000048 (Tier1)    | 886     | 0                 | 443   | 443      | 198345  |
+
+## Data Gathering
+
+Before starting to preprocess the datasets, we need to decrypt and convert the datasets into PED format. PED format is a standard format among genomic datasets. After downloading the whole datasets, one would perform the following steps:
+
+### SRA Toolkit Installation
+
+1. **Install SRA toolkit on the server:**
+   - Download the installation file from: [SRA Toolkit Installation](https://github.com/ncbi/sra-tools/wiki/02.-Installing-SRA-Toolkit)
+   - After downloading the toolkit, extract it with this command:
+
+     ```bash
+     tar -vxzf sratoolkit.tar.gz
+     ```
+
+   - For convenience (and to show where the binaries are), append the path to the binaries to the PATH environment variable:
+
+     ```bash
+     export PATH=$PATH:$PWD/sratoolkit.2.4.0-1.mac64/bin
+     ```
+
+   - Verify that the shell will find the binaries:
+
+     ```bash
+     which fastq-dump
+     ```
+
+     This should produce output similar to:
+
+     ```
+     /Users/JoeUser/sratoolkit.2.4.0-1.mac64/bin/fastq-dump
+     ```
+
+   - Proceed to configure the toolkit: [Quick Toolkit Configuration](https://github.com/ncbi/sra-tools/wiki/Quick-Toolkit-Configuration)
+
+   - Test that the toolkit is functional:
+
+     ```bash
+     fastq-dump --stdout SRR390728 | head -n 8
+     ```
+
+     Within a few seconds, the command should produce the exact output as specified.
+
+## Dataset Decryption
+
+We need to decrypt the “matrixfmt” file for our research. To do that, we performed the following steps:
+
+- **Decrypt the file named:** `phg000233.v1.CIDR AutopsyPD.genotype-calls matrixfmt.c1.ARU.tar.ncbi.enc`. As an example, the commands are showing the steps for the Autopsy dataset. This file is encrypted with a `.ngc` key value.
+
+- **Read this guideline before applying the decryption command on the datasets:** [Decryption Guideline](https://trace.ncbi.nlm.nih.gov/Traces/sra/sra.cgi?view=toolkit_doc&f=vdb-decrypt)
+
+- **Run this command for decryption:**
+
+```bash
+/gpfs/home/aameli/sratoolkit.2.11.0-ubuntu64/bin/vdb-decrypt --ngc /
+```
+
+## Dataset Conversion to PED Format with PLINK
+
+Make sure PLINK [106] is installed on the server properly. If it is not installed on one's operating system, download and install it: [PLINK Installation](https://zzz.bwh.harvard.edu/plink/)
+
+- Create a text file named `allfiles.txt` which contains the following:
+
+CIDR AutopsyPD Top sample level.bed
+CIDR AutopsyPD Top sample level.bim
+CIDR AutopsyPD Top sample level.fam
+
+
+Note: Sometimes, these three files are zipped. So, extract them before going to the next step. The file names mentioned are from the Autopsy dataset.
+
+- Use PLINK to convert these three files into PED format:
+
+```bash
+plink --bfile dbGaP_AutopsyPD_filter --merge-list allFiles.txt --recode --allele1234 --out PD_5 --noweb
+```
+
+After running the mentioned command, there will be some outputs. The outputs which we are looking for are:
+
+PD_5.map
+
+PD_5.ped
+
+PD_5.fam
+
+Now, we can run the preprocessing R® script on PED and FAM files to convert them into CSV format.
+
+This section provides instructions on using PLINK to convert dataset files into the PED format, which is essential for further preprocessing. It includes guidance on creating a text file for PLINK, running the conversion command, and identifying the output files required for subsequent processing.
+
+
 ## Approaches
 
 ### Approach 0: Baseline Approach
