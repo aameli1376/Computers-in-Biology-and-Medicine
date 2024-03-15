@@ -15,7 +15,8 @@ import csv
 def main():
 
     dataset_list = ['FamilyNINDS1(Merged)']
-    path = "/scratch/fs2/usefi/pd/datasets/All_Aproaches/Approach3/Datasets/"
+    # needs to be replaced by the path of files
+    path = ""
     # Parameters
     k = 50
     th_irr = 3
