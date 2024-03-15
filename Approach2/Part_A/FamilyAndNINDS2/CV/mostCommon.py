@@ -17,8 +17,8 @@ if __name__ == "__main__":
     
     SNPsList = list(SNPsDic.keys())
     print(len(SNPsList))
-
-    path = '/scratch/fs2/usefi/pd/datasets/All_Aproaches/Approach2/Datasets/IntersectionFamilyAndNINDS2/'
+    # needs to be replaced by the path of files
+    path = ''
 
     print("current path of working space= " + path)
   
