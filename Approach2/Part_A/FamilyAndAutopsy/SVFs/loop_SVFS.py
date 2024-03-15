@@ -15,7 +15,8 @@ import csv
 def main():
 
     dataset_list = ['2Family']
-    path = "/scratch/fs2/usefi/pd/datasets/All_Aproaches/Approach2/Datasets/IntersectionFamilyAndAutopsy/"
+    # needs to be replaced by the path of files
+    path = ""
     # Parameters
     k = 50
     th_irr = 3
