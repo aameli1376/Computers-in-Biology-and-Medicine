@@ -17,15 +17,17 @@ if __name__ == "__main__":
     
     SNPsList = list(SNPsDic.keys())
     print(len(SNPsList))
-
-    #path = '/scratch/fs2/usefi/pd/datasets/NINDS2-FinalAnalyze/Datasets/'
+    # needs to be replaced by the path of files
+    #path = ''
 
     #print("current path of working space= " + path)
   
     
     # SNPs that are in LD with our most common SNPs
     LDList = []    
-    f1 = open('/scratch/fs2/usefi/pd/datasets/All_Aproaches/Approach1/NINDS1-FinalAnalyze/SNPsinLDwithmostcommonSNPs.txt', 'r')
+    # needs to be replaced by the path of files
+    path = ''
+    f1 = open(path + '/SNPsinLDwithmostcommonSNPs.txt', 'r')
     for line1 in f1:
         LDList.append(line1.strip())  # We don't want newlines in our list, do we?
     
