@@ -20,7 +20,7 @@ if __name__ == "__main__":
     print(SNPsList)
 
     # needs to be replaced by the path of files
-    path = '/users/fs1/aameli/Start_from_scratch/Approach0/Datasets/'
+    path = ''
 
     print("current path of working space= " + path)
   
